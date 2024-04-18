@@ -2,7 +2,8 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
-import { transformVNodeArgs } from "vue";
+import '../App.css';
+
 
 const Jobs = () => {
   const [Jobs, setJobs] = useState([]);
@@ -26,11 +27,11 @@ const Jobs = () => {
   }
 
   return(
-    <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+    <table  className = "tableInfo">
       <thead>
         <tr>
           {TABLE_HEAD.map((head, index) => (
-            <th key={index} style={{ backgroundColor: '#001770', color: 'white', padding: '10px', textAlign: 'left' }}>
+            <th key={index} className = "headStyle">
               {head}
             </th>
           ))}
@@ -39,11 +40,11 @@ const Jobs = () => {
       <tbody>
         {Jobs.map((job, index) => (
           <tr key={index} style={{ backgroundColor: index % 2 ? '#f2f2f2' : 'white' }}>
-            <td style={{ padding: '10px' }}>{job.title}</td>
-            <td style={{ padding: '10px' }}>{job.company}</td>
-            <td style={{ padding: '10px' }}>{job.description}</td>
-            <td style={{ padding: '10px' }}>{job.location}</td>
-            <td style={{ padding: '10px', color: 'blue', cursor: 'pointer' }}>
+            <td className="rowData">{job.title}</td>
+            <td className="rowData">{job.company}</td>
+            <td className="rowData">{job.description}</td>
+            <td  className="rowData">{job.location}</td>
+            <td className="rowData">
               {
               job.tags[0]? job.tags[0] : ""
               }
@@ -52,7 +53,7 @@ const Jobs = () => {
               }
             </td>
             <td>
-              <button style={{padding: '5px', backgroundColor:'#001770', border: "1px solid gray", color:'white'}} onClick={buttonClick}>Apply</button>
+              <button  className={"apply"} onClick={buttonClick}>Apply</button>
             </td>
           </tr>
         ))}

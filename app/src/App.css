@@ -36,3 +36,43 @@
     transform: rotate(360deg);
   }
 }
+
+
+.logo{
+  width:15%;
+  height:5%;
+}
+
+.tableInfo{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.headStyle{
+  background-color: #001770; 
+  color: white; 
+  padding: 10px; 
+  text-align: left; 
+}
+
+.rowData{
+  padding: 10px;
+}
+
+.apply{
+  padding: 10px 20px;
+  background-color: #001770;
+  border: 1px solid #404040;
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 8px; 
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.2); 
+  transition: all 0.3s ease;
+}
+
+.apply:hover{
+  background-color: #002399;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+}
