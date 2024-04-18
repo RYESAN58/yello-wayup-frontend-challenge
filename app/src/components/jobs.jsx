@@ -13,6 +13,7 @@ const Jobs = () => {
       const result = response.data;
       setJobs(result)
       console.log(result)
+      console.log(result)
     }).catch((err)=> {
       console.log(err.response)
     })
@@ -22,8 +23,9 @@ const Jobs = () => {
   }, [])
   const TABLE_HEAD = ["Title", "Company", "Description", "Location",'Tags' ,""];
 
-  const buttonClick = () => {
+  const buttonClick = (jobid) => {
     alert("APPLIED!")
+    setJobs(Jobs.filter(job => job.id !== jobid));
   }
 
   return(
@@ -53,7 +55,7 @@ const Jobs = () => {
               }
             </td>
             <td>
-              <button  className={"apply"} onClick={buttonClick}>Apply</button>
+              <button  className={"apply"} onClick={() => buttonClick(job.id)}>Apply</button>
             </td>
           </tr>
         ))}
