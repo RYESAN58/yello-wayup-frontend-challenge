@@ -12,8 +12,6 @@ const Jobs = () => {
     .then((response)=> {
       const result = response.data;
       setJobs(result)
-      console.log(result)
-      console.log(result)
     }).catch((err)=> {
       console.log(err.response)
     })
