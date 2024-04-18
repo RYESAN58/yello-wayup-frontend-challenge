@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
-import { Card, Typography } from "@material-tailwind/react";
+import { transformVNodeArgs } from "vue";
 
 const Jobs = () => {
   const [Jobs, setJobs] = useState([]);
@@ -11,6 +11,7 @@ const Jobs = () => {
     .then((response)=> {
       const result = response.data;
       setJobs(result)
+      console.log(result)
     }).catch((err)=> {
       console.log(err.response)
     })
@@ -18,78 +19,45 @@ const Jobs = () => {
       
     }
   }, [])
-  const TABLE_HEAD = ["Title", "Company", "Description", "Location", ""];
+  const TABLE_HEAD = ["Title", "Company", "Description", "Location",'Tags' ,""];
+
+  const buttonClick = () => {
+    alert("APPLIED!")
+  }
 
   return(
-    <Card>
-      <table>
-        <thead>
-          <tr>
-            {TABLE_HEAD.map((head, key) => (
-              <th
-                key={key}
-                className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
-              >
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="font-normal leading-none opacity-70"
-                >
-                  {head}
-                </Typography>
-              </th>
-            ))}
+    <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+      <thead>
+        <tr>
+          {TABLE_HEAD.map((head, index) => (
+            <th key={index} style={{ backgroundColor: '#001770', color: 'white', padding: '10px', textAlign: 'left' }}>
+              {head}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {Jobs.map((job, index) => (
+          <tr key={index} style={{ backgroundColor: index % 2 ? '#f2f2f2' : 'white' }}>
+            <td style={{ padding: '10px' }}>{job.title}</td>
+            <td style={{ padding: '10px' }}>{job.company}</td>
+            <td style={{ padding: '10px' }}>{job.description}</td>
+            <td style={{ padding: '10px' }}>{job.location}</td>
+            <td style={{ padding: '10px', color: 'blue', cursor: 'pointer' }}>
+              {
+              job.tags[0]? job.tags[0] : ""
+              }
+              {
+              job.tags[1]? ", " + job.tags[1] : ""
+              }
+            </td>
+            <td>
+              <button style={{padding: '5px', backgroundColor:'#001770', border: "1px solid gray", color:'white'}} onClick={buttonClick}>Apply</button>
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          {Jobs.map(({ title, company, description,tags,location }, index) => {
-            const isLast = index === Jobs.length - 1;
-            const classes = isLast ? "p-4" : "p-4 border-b border-blue";
-            return (
-              <tr key={index}>
-                <td className={classes}>
-                  <Typography
-                    variant="small"
-                    color="blue"
-                    className="font-normal"
-                  >
-                    {title}
-                  </Typography>
-                </td>
-                <td className={classes}>
-                  <Typography
-                    variant="small"
-                    color="blue"
-                    className="font-normal"
-                  >
-                    {company}
-                  </Typography>
-                </td>
-                <td className={classes}>
-                  <Typography
-                    variant="small"
-                    color="blue"
-                    className="font-normal"
-                  >
-                    {description}
-                  </Typography>
-                </td>
-                <td className={classes}>
-                  <Typography
-                    as="a"
-                    variant="small"
-                    color="blue"
-                    className="font-medium"
-                  >
-                    {location}
-                  </Typography>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </Card>
+        ))}
+      </tbody>
+    </table>
   )
 }
 
